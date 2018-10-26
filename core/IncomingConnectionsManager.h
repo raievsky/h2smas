@@ -11,7 +11,7 @@
 class IncomingConnectionsManager {
 
 public:
-    IncomingConnectionsManager(boost::asio::io_service &io_service, AgentRequestHandler requestHandler);
+    IncomingConnectionsManager(boost::asio::io_service &io_service, AgentRequestHandler& requestHandler);
 
     ~IncomingConnectionsManager();
 

@@ -16,7 +16,7 @@
 using boost::asio::ip::tcp;
 
 IncomingConnectionsManager::IncomingConnectionsManager(boost::asio::io_service &io_service,
-                                                       AgentRequestHandler requestHandler)
+                                                       AgentRequestHandler& requestHandler)
         : m_acceptor(io_service, tcp::endpoint(tcp::v4(), 7777)), m_signals(io_service),
           m_agentRequestHandler(requestHandler)
 {
