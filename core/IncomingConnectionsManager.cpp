@@ -15,7 +15,7 @@
 
 using boost::asio::ip::tcp;
 
-IncomingConnectionsManager::IncomingConnectionsManager(boost::asio::io_service &io_service,
+IncomingConnectionsManager::IncomingConnectionsManager(boost::asio::io_service& io_service,
                                                        AgentRequestHandler& requestHandler)
         : m_acceptor(io_service, tcp::endpoint(tcp::v4(), 7777)), m_signals(io_service),
           m_agentRequestHandler(requestHandler)
@@ -41,7 +41,7 @@ void IncomingConnectionsManager::StartAccept()
 }
 
 void IncomingConnectionsManager::handleAccept(int connectionId,
-                                              const boost::system::error_code &error)
+                                              const boost::system::error_code& error)
 {
 
     std::cout << "Handling an asynchronous accept. Id : " << connectionId << std::endl;

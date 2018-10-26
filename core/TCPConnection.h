@@ -15,10 +15,10 @@ class TCPConnection
 public:
     typedef std::shared_ptr<TCPConnection> TCPConnectionPtr;
 
-    TCPConnection(boost::asio::io_service &service, const int id, AgentRequestHandler &requestHandler);
+    TCPConnection(boost::asio::io_service& service, const int id, AgentRequestHandler& requestHandler);
 
 
-    boost::asio::ip::tcp::socket &socket();
+    boost::asio::ip::tcp::socket& socket();
 
     void startReading();
 
@@ -28,9 +28,9 @@ public:
 
 protected:
 
-    AgentRequestHandler &m_requestHandler;
+    AgentRequestHandler& m_requestHandler;
 
-    void handle_write(const boost::system::error_code &ec,
+    void handle_write(const boost::system::error_code& ec,
                       size_t /*bytes_transferred*/);
 
     boost::asio::ip::tcp::socket m_socket;

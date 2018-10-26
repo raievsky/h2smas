@@ -10,13 +10,13 @@
 
 using boost::asio::ip::tcp;
 
-TCPConnection::TCPConnection(boost::asio::io_service &io_service, const int id, AgentRequestHandler &requestHandler)
+TCPConnection::TCPConnection(boost::asio::io_service& io_service, const int id, AgentRequestHandler& requestHandler)
         : m_socket(io_service), m_id(id), m_requestHandler(requestHandler)
 {
 
 }
 
-tcp::socket &TCPConnection::socket()
+tcp::socket& TCPConnection::socket()
 {
     return m_socket;
 }
@@ -30,7 +30,7 @@ void TCPConnection::startReading()
     std::cout << "Async read started." << std::endl;
 }
 
-void TCPConnection::handle_write(const boost::system::error_code &ec, size_t /*bytes_transferred*/)
+void TCPConnection::handle_write(const boost::system::error_code& ec, size_t /*bytes_transferred*/)
 {
     if (ec)
     {

@@ -15,22 +15,22 @@ public:
     static const char *AGTS_IN_RANGE_REQUEST_STRING;
     static const char *ADD_AGT_ID_RANGE_REQUEST_STRING;
 
-    AgentRequestHandler(EnvironmentIF &env);
+    AgentRequestHandler(EnvironmentIF& env);
 
-    bool handleRequest(int id, std::string request, std::string &answer);
+    bool handleRequest(int id, std::string request, std::string& answer);
 
     bool doSomeTests();
 
 protected:
-    EnvironmentIF &m_environment;
+    EnvironmentIF& m_environment;
 
-    bool handleSetPos(int agentId, const std::string &basic_string);
+    bool handleSetPos(int agentId, const std::string& basic_string);
 
-    bool handleAgentsInRange(int id, const std::string &request, std::string &answer);
+    bool handleAgentsInRange(int id, const std::string& request, std::string& answer);
 
     bool handleAddAgent(int id);
 
-    void extractXYZ(const std::string request, int &x, int &y, int &z);
+    void extractXYZ(const std::string request, int& x, int& y, int& z);
 
     bool testExtract(const std::string request, int x, int y, int z);
 

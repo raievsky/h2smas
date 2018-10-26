@@ -21,7 +21,7 @@ int main(int argc, char **argv)
         IncomingConnectionsManager server(io_service, requestHandler);
         io_service.run();
     }
-    catch (std::exception &e)
+    catch (std::exception& e)
     {
         std::cerr << e.what() << std::endl;
     }

@@ -11,13 +11,13 @@ const char *AgentRequestHandler::SET_POS_REQUEST_STRING = "setPos";
 const char *AgentRequestHandler::AGTS_IN_RANGE_REQUEST_STRING = "agentsInRange";
 const char *AgentRequestHandler::ADD_AGT_ID_RANGE_REQUEST_STRING = "addAgent";
 
-AgentRequestHandler::AgentRequestHandler(EnvironmentIF &env)
+AgentRequestHandler::AgentRequestHandler(EnvironmentIF& env)
         : m_environment(env)
 {
 
 }
 
-bool AgentRequestHandler::handleRequest(int id, std::string request, std::string &answer)
+bool AgentRequestHandler::handleRequest(int id, std::string request, std::string& answer)
 {
     if (request.size() == 0)
     {
@@ -38,11 +38,12 @@ bool AgentRequestHandler::handleRequest(int id, std::string request, std::string
     {
         return handleAddAgent(id);
     }
+    return false;
 }
 
 // TODO Unit test this function
 // TODO check its performance
-bool AgentRequestHandler::handleSetPos(int agentId, const std::string &request)
+bool AgentRequestHandler::handleSetPos(int agentId, const std::string& request)
 {
     std::istringstream rsstream(request);
 
@@ -80,7 +81,7 @@ bool AgentRequestHandler::handleSetPos(int agentId, const std::string &request)
     return false;
 }
 
-bool AgentRequestHandler::handleAgentsInRange(int id, const std::string &request, std::string &answer)
+bool AgentRequestHandler::handleAgentsInRange(int id, const std::string& request, std::string& answer)
 {
 
     std::istringstream rsstream(request.substr(strlen(AGTS_IN_RANGE_REQUEST_STRING) + 1)); // +1 for the opening '('
@@ -115,7 +116,7 @@ bool AgentRequestHandler::handleAddAgent(int id)
     return false;
 }
 
-void AgentRequestHandler::extractXYZ(const std::string request, int &x, int &y, int &z)
+void AgentRequestHandler::extractXYZ(const std::string request, int& x, int& y, int& z)
 {
     std::istringstream iss(request);
 

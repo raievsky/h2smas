@@ -11,7 +11,7 @@
 class IncomingConnectionsManager {
 
 public:
-    IncomingConnectionsManager(boost::asio::io_service &io_service, AgentRequestHandler& requestHandler);
+    IncomingConnectionsManager(boost::asio::io_service& io_service, AgentRequestHandler& requestHandler);
 
     ~IncomingConnectionsManager();
 
@@ -19,7 +19,7 @@ protected:
     void StartAccept();
 
     void handleAccept(int connectionId,
-                      const boost::system::error_code &error);
+                      const boost::system::error_code& error);
 
 
     // Ensure the IncomingConnectionManager wait for a signal to disapear
@@ -32,7 +32,7 @@ protected:
     /// The signal_set is used to register for process termination notifications.
     boost::asio::signal_set m_signals;
 
-    AgentRequestHandler &m_agentRequestHandler;
+    AgentRequestHandler& m_agentRequestHandler;
 };
 
 #endif //HHSMAS_INCOMINGCONNECTIONSMANAGER_H
