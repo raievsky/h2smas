@@ -130,11 +130,13 @@ void AgentRequestHandler::extractXYZ(const std::string request, int &x, int &y, 
     }
 }
 
-void AgentRequestHandler::testExtract(const std::string request, int x, int y, int z)
+bool AgentRequestHandler::testExtract(const std::string request, int x, int y, int z)
 {
     int a = 0, b = 0, c = 0;
 
     extractXYZ(request, a, b, c);
+
+    bool pass = true;
 
     if (a == x && b == y && c == z)
     {
@@ -145,15 +147,20 @@ void AgentRequestHandler::testExtract(const std::string request, int x, int y, i
         fprintf(stderr, "Failure on extraction.\n");
         fprintf(stderr, "Expected : x: %d, y: %d, z: %d\n", x, y, z);
         fprintf(stderr, "Extracted : x: %d, y: %d, z: %d\n", a, b, c);
+        pass = false;
     }
+
+    return pass;
 }
 
 bool AgentRequestHandler::doSomeTests()
 {
-    testExtract("   setPos ( 12, 42);  ", 12, 42, 0);
-    testExtract("setPos ( 32, 33, 43 );  ", 32, 33, 43);
-    testExtract("  setPos  ( 32, -33, 43 );  ", 32, -33, 43);
-    testExtract("   setPos ( 32, 33 );  ", 32, 33, 0);
-    testExtract("setPos( 32, 33 )", 32, 33, 0);
-    testExtract("setPos( 32, 33, )", 32, 33, 0);
+    bool success = true;
+    success = success && testExtract("   setPos ( 12, 42);  ", 12, 42, 0);
+    success = success && testExtract("setPos ( 32, 33, 43 );  ", 32, 33, 43);
+    success = success && testExtract("  setPos  ( 32, -33, 43 );  ", 32, -33, 43);
+    success = success && testExtract("   setPos ( 32, 33 );  ", 32, 33, 0);
+    success = success && testExtract("setPos( 32, 33 )", 32, 33, 0);
+    success = success && testExtract("setPos( 32, 33, )", 32, 33, 0);
+    return success;
 }

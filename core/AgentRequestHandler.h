@@ -32,7 +32,7 @@ protected:
 
     void extractXYZ(const std::string request, int &x, int &y, int &z);
 
-    void testExtract(const std::string request, int x, int y, int z);
+    bool testExtract(const std::string request, int x, int y, int z);
 
 };
 
