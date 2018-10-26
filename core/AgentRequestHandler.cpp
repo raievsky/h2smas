@@ -104,8 +104,12 @@ bool AgentRequestHandler::handleAgentsInRange(int id, const std::string& request
 
     answer = l_stringstream.str();
 
-    // Replace last ',' by ']'
-    answer.back() = ']';
+    if (agtsInRange.size() > 0)
+    {
+        // Replace last ',' by ']'
+        answer.back() = ']';
+    }
+    answer.push_back('\n');
 
     return true;
 }
