@@ -1,0 +1,78 @@
+@startuml
+
+participant Agent
+participant Core
+' participant "Bluetooth Handler\nLib" as BTHandler
+participant IncomingConnectionsManager as ICM
+
+Activate Core
+Core --> ICM: instanciate
+Activate ICM
+ICM --> TCPConnection: instanciate
+ICM --> ICM: StartAccept (async_accept)
+
+... Waiting for connections ...
+
+group connection
+   Agent --> ICM: Connect
+   ICM --> TCPConnection: startReading
+   Activate TCPConnection
+end
+
+... Waiting for messages ...
+
+group Agent creation
+   Agent --> TCPConnection: Id?
+   TCPConnection --> AgentRequestHandler: handleRequest
+   Activate AgentRequestHandler
+   AgentRequestHandler --> AgentRequestHandler: handleAddAgent
+   AgentRequestHandler --> Environment: addAgent
+   deactivate AgentRequestHandler
+end
+
+
+
+
+'  alt bluetooth adapter present
+'     BTHandler --> BluetoothEcho: Yes
+'     BluetoothEcho --> BTHandler: Active?
+'     alt bluetooth adapter active
+'        BTHandler --> BluetoothEcho: Yes
+'     else bluetooth adapter *not* active
+'        BluetoothEcho --> BTHandler: Activate bluetooth
+'        ...
+'        BTHandler --> BluetoothEcho: Bluetooth adapter activated
+'        note right
+'           Asynchronous call
+'           to "onActivityResult"
+'        end note
+'     end
+'     BluetoothEcho --> User: Bluetooth adapter active
+'  
+'     BluetoothEcho --> BTHandler: Create BT Socket
+'     alt Bluetooth socket created
+'        BluetoothEcho --> User: Bluetooth socket created
+'        note over BluetoothEcho
+'           Application ready to receive
+'           data over the created bluetooth socket
+'        end note
+'     else Error while creating bluetooth socket
+'        BluetoothEcho --> User: Error, failed to create BT socket
+'        note right
+'           e.g. IOException
+'        end note
+'     end
+'  
+'  
+'  |||
+'  
+'  else no bluetooth adapter
+'     BTHandler --> BluetoothEcho: No
+'     BluetoothEcho --> User: Error, no bluetooth adapter
+'  end
+
+
+
+
+
+@enduml
