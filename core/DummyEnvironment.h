@@ -15,7 +15,9 @@ class DummyEnvironment : public EnvironmentIF {
 public:
     virtual bool addAgent(int id);
 
-    std::vector<int> getIdsInRange(int agentId, int range);
+    const std::vector<int> getAllIds() const;
+
+    const std::vector<int> getIdsInRange(int agentId, int range) const;
 
     virtual bool setPos(int agentID, coord_t x, coord_t y, coord_t z);
 

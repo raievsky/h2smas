@@ -10,6 +10,7 @@
 const char *AgentRequestHandler::SET_POS_REQUEST_STRING = "setPos";
 const char *AgentRequestHandler::AGTS_IN_RANGE_REQUEST_STRING = "agentsInRange";
 const char *AgentRequestHandler::ADD_AGT_ID_RANGE_REQUEST_STRING = "addAgent";
+const char *AgentRequestHandler::ALL_AGT_REQUEST_STRING = "agents?";
 
 AgentRequestHandler::AgentRequestHandler(EnvironmentIF& env)
         : m_environment(env)
@@ -37,6 +38,11 @@ bool AgentRequestHandler::handleRequest(int id, std::string request, std::string
     if (request.compare(0, strlen(ADD_AGT_ID_RANGE_REQUEST_STRING), ADD_AGT_ID_RANGE_REQUEST_STRING) == 0)
     {
         return handleAddAgent(id);
+    }
+
+    if (request.compare(0, strlen(ALL_AGT_REQUEST_STRING), ALL_AGT_REQUEST_STRING) == 0)
+    {
+        return handleAllAgents(request, answer);
     }
     return false;
 }
@@ -118,6 +124,31 @@ bool AgentRequestHandler::handleAddAgent(int id)
 {
     m_environment.addAgent(id);
     return false;
+}
+
+bool AgentRequestHandler::handleAllAgents(const std::string& request, std::string& answer)
+{
+
+    std::vector<int> allAgents = m_environment.getAllIds();
+
+    std::stringstream l_stringstream;
+    l_stringstream << "[";
+
+    for (auto id : allAgents)
+    {
+        l_stringstream << id << ",";
+    }
+
+    answer = l_stringstream.str();
+
+    if (allAgents.size() > 0)
+    {
+        // Replace last ',' by ']'
+        answer.back() = ']';
+    }
+    answer.push_back('\n');
+
+    return true;
 }
 
 void AgentRequestHandler::extractXYZ(const std::string request, int& x, int& y, int& z)

@@ -79,16 +79,16 @@ void TCPConnection::handleReadLine(boost::system::error_code ec, std::size_t byt
                                                  boost::asio::placeholders::bytes_transferred));
             std::cout << "Sending agent id scheduled." << std::endl;
         }
-        else if (request == "agents?")
-        {
-            std::cout << "Agent list request received." << std::endl;
-            m_message = "[1,2,3,4,5]\n";
-            boost::asio::async_write(m_socket, boost::asio::buffer(m_message),
-                                     boost::bind(&TCPConnection::handle_write, this,
-                                                 boost::asio::placeholders::error,
-                                                 boost::asio::placeholders::bytes_transferred));
-            std::cout << "Sending of current agent list scheduled." << std::endl;
-        }
+        //else if (request == "agents?")
+        //{
+        //    std::cout << "Agent list request received." << std::endl;
+        //    m_message = "[1,2,3,4,5]\n";
+        //    boost::asio::async_write(m_socket, boost::asio::buffer(m_message),
+        //                             boost::bind(&TCPConnection::handle_write, this,
+        //                                         boost::asio::placeholders::error,
+        //                                         boost::asio::placeholders::bytes_transferred));
+        //    std::cout << "Sending of current agent list scheduled." << std::endl;
+        //}
         else
         {
 

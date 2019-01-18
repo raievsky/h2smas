@@ -14,6 +14,7 @@ public:
     static const char *SET_POS_REQUEST_STRING;
     static const char *AGTS_IN_RANGE_REQUEST_STRING;
     static const char *ADD_AGT_ID_RANGE_REQUEST_STRING;
+    static const char *ALL_AGT_REQUEST_STRING;
 
     AgentRequestHandler(EnvironmentIF& env);
 
@@ -29,6 +30,8 @@ protected:
     bool handleAgentsInRange(int id, const std::string& request, std::string& answer);
 
     bool handleAddAgent(int id);
+
+    bool handleAllAgents(const std::string& request, std::string& answer);
 
     void extractXYZ(const std::string request, int& x, int& y, int& z);
 

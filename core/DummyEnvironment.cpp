@@ -5,8 +5,18 @@
 #include <iostream>
 #include "DummyEnvironment.h"
 
+const std::vector<int> DummyEnvironment::getAllIds() const
+{
+   std::vector<int> result(m_agentsPositions.size());
+    for (int i = 0; i < m_agentsPositions.size(); ++i)
+    {
+        result[i] = i;
+    }
+    return std::move(result);
+}
+
 // TODO unit test this function
-std::vector<int> DummyEnvironment::getIdsInRange(int agentId, int range)
+const std::vector<int> DummyEnvironment::getIdsInRange(int agentId, int range) const
 {
     std::vector<int> result;
 

@@ -16,7 +16,9 @@ public:
 
     virtual bool setPos(int agentID, coord_t x, coord_t y, coord_t z) = 0;
 
-    virtual std::vector<int> getIdsInRange(int agentId, int range) = 0;
+    virtual const std::vector<int> getAllIds() const = 0;
+
+    virtual const std::vector<int> getIdsInRange(int agentId, int range) const = 0;
 
 };
 
